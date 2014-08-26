@@ -5,7 +5,7 @@ A python client library for Consul
 
 """
 import logging
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from consulate import adapters
 
@@ -69,7 +69,7 @@ class _Endpoint(object):
             query_params['dc'] = self._dc
         if query_params:
             return '%s/%s?%s' % (self._base_uri, '/'.join(params),
-                                 urllib.urlencode(query_params))
+                                 urllib.parse.urlencode(query_params))
         return '%s/%s' % (self._base_uri, '/'.join(params))
 
     def _get(self, params, query_params=None):
